@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Course Flashcards</title>
+</head>
+
+<body>
+    <h1>Course Flashcards</h1>
+
+<p id="progress">Card 1 of 5</p>
+
+<h2 id="question">Question goes here</h2>
+
+<p id="answer" style="display: none;">Answer goes here</p>
+
+<button id="show-answer-btn">Show Answer</button>
+
+<button id="next-btn">Next</button>
+
+
+    <script>
+const cards = [
+    {
+        question: "What does HTTP stand for?",
+        answer: "HyperText Transfer Protocol"
+    },
+    {
+        question: "What status code means 'Not Found'?",
+        answer: "404"
+    },
+    {
+        question: "What does CSS stand for?",
+        answer: "Cascading Style Sheets"
+    },
+    {
+        question: "What does DOM stand for?",
+        answer: "Document Object Model"
+    },
+    {
+        question: "What Python library do we use for HTTP requests?",
+        answer: "requests"
+    }
+];
+
+let currentIndex = 0;
+
+const questionElement = document.querySelector("#question");
+const answerElement = document.querySelector("#answer");
+const progressElement = document.querySelector("#progress");
+const showAnswerBtn = document.querySelector("#show-answer-btn");
+const nextBtn = document.querySelector("#next-btn");
+
+function showCard() {
+    questionElement.textContent = cards[currentIndex].question;
+    answerElement.textContent = cards[currentIndex].answer;
+    progressElement.textContent =
+        `Card ${currentIndex + 1} of ${cards.length}`;
+}
+
+showCard();
+
+showAnswerBtn.addEventListener("click", () => {
+    answerElement.style.display = "block";
+});
+
+nextBtn.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % cards.length;
+
+    answerElement.style.display = "none";
+
+    showCard();
+});
+
+    </script>
+
+</body>
+
+</html>
